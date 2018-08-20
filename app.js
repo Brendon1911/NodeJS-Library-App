@@ -3,6 +3,7 @@ const express = require("express"),
       chalk = require("chalk"),
       debug = require("debug")("app"),
       morgan = require("morgan"),
+      path = require("path"),
       port = process.env.PORT;
 
 // Declare app
@@ -13,7 +14,7 @@ app.use(morgan("tiny"));
 
 // Home route
 app.get("/", (req, res) => {
-  res.send("Hello from my library app!");
+  res.sendFile(path.join(__dirname, "views/index.html"));
 });
 
 app.listen(port, (req, res) => {
