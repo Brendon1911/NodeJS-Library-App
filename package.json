@@ -1,0 +1,22 @@
+{
+  "name": "node-library-app",
+  "version": "1.0.0",
+  "description": "A library web app built with Node.js and Express.js",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Brendon1911/NodeJS-Library-App.git"
+  },
+  "author": "Brendon Richards",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Brendon1911/NodeJS-Library-App/issues"
+  },
+  "homepage": "https://github.com/Brendon1911/NodeJS-Library-App#readme",
+  "dependencies": {
+    "express": "4.16.3"
+  }
+}
