@@ -18,6 +18,7 @@
   "homepage": "https://github.com/Brendon1911/NodeJS-Library-App#readme",
   "dependencies": {
     "chalk": "2.4.1",
+    "debug": "3.1.0",
     "express": "4.16.3"
   }
 }

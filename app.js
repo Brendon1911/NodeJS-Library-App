@@ -1,5 +1,7 @@
 // Requirements
 const express = require("express"),
+      chalk = require("chalk"),
+      debug = require("debug")("app"),
       port = process.env.PORT;
 
 // Declare app
@@ -11,5 +13,5 @@ app.get("/", (req, res) => {
 });
 
 app.listen(port, (req, res) => {
-  console.log(`Listening on port ${port}...`);
+  console.log(`Listening on port ${chalk.green(port)}...`);
 });
