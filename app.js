@@ -2,10 +2,14 @@
 const express = require("express"),
       chalk = require("chalk"),
       debug = require("debug")("app"),
+      morgan = require("morgan"),
       port = process.env.PORT;
 
 // Declare app
 const app = express()
+
+// Use Morgan
+app.use(morgan("tiny"));
 
 // Home route
 app.get("/", (req, res) => {
@@ -13,5 +17,5 @@ app.get("/", (req, res) => {
 });
 
 app.listen(port, (req, res) => {
-  console.log(`Listening on port ${chalk.green(port)}...`);
+  debug(`Listening on port ${chalk.green(port)}...`);
 });
