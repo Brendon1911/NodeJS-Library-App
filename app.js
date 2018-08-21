@@ -12,6 +12,9 @@ const app = express()
 // Use Morgan
 app.use(morgan("tiny"));
 
+// Use public files
+app.use(express.static(path.join(__dirname, "/public")));
+
 // Home route
 app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "views/index.html"));
