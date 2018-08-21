@@ -32,12 +32,13 @@ app.use('/js', express.static(path.join(__dirname, '/node_modules/popper.js/dist
 app.set('views', './src/views');
 
 // Set Pug templating engine
-app.set('view engine', 'pug');
+app.set('view engine', 'ejs');
 
 // Index route
 app.get('/', (req, res) => {
   res.render('index', {
-    list: ['a', 'b']
+    list: ['a', 'b'],
+    title: 'Node Library App'
   });
 });
 
