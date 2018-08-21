@@ -1,7 +1,10 @@
 html
   head
     title Node Library App
-  body
-    h1 Node Library App
+  body(class=["myClass"])
+    h1(id='myId') Node Library App
     p
       h3 sub header
+    ul
+      each val in list
+        li= val

@@ -36,7 +36,9 @@ app.set('view engine', 'pug');
 
 // Index route
 app.get('/', (req, res) => {
-  res.render('index');
+  res.render('index', {
+    list: ['a', 'b']
+  });
 });
 
 app.listen(port, (req, res) => {
