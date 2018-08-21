@@ -1,35 +1,36 @@
-// Requirements
-const express = require("express"),
-      chalk = require("chalk"),
-      debug = require("debug")("app"),
-      morgan = require("morgan"),
-      path = require("path"),
-      port = process.env.PORT;
+// Require statements
+const express = require('express');
+const chalk = require('chalk');
+const debug = require('debug')('app');
+const morgan = require('morgan');
+const path = require('path');
+
+const port = process.env.PORT;
 
 // Declare app
-const app = express()
+const app = express();
 
 // Use Morgan
-app.use(morgan("tiny"));
+app.use(morgan('tiny'));
 
 // Use public files
-app.use(express.static(path.join(__dirname, "/public")));
+app.use(express.static(path.join(__dirname, '/public')));
 
 // Use Bootstrap CSS
-app.use("/css", express.static(path.join(__dirname, "/node_modules/bootstrap/dist/css")));
+app.use('/css', express.static(path.join(__dirname, '/node_modules/bootstrap/dist/css')));
 
 // Use Bootstrap JS
-app.use("/js", express.static(path.join(__dirname, "/node_modules/bootstrap/dist/js")));
+app.use('/js', express.static(path.join(__dirname, '/node_modules/bootstrap/dist/js')));
 
 // Use jQuery
-app.use("/js", express.static(path.join(__dirname, "/node_modules/jquery/dist")));
+app.use('/js', express.static(path.join(__dirname, '/node_modules/jquery/dist')));
 
 // Use Popper.js
-app.use("/js", express.static(path.join(__dirname, "/node_modules/popper.js/dist/umd")));
+app.use('/js', express.static(path.join(__dirname, '/node_modules/popper.js/dist/umd')));
 
-// Home route
-app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "views/index.html"));
+// Index route
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, 'views/index.html'));
 });
 
 app.listen(port, (req, res) => {
