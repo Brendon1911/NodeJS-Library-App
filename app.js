@@ -5,7 +5,7 @@ const debug = require('debug')('app');
 const morgan = require('morgan');
 const path = require('path');
 
-const port = process.env.PORT;
+const port = process.env.PORT || 3000;
 
 // Declare app
 const app = express();
