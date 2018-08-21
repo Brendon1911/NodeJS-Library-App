@@ -28,9 +28,15 @@ app.use('/js', express.static(path.join(__dirname, '/node_modules/jquery/dist'))
 // Use Popper.js
 app.use('/js', express.static(path.join(__dirname, '/node_modules/popper.js/dist/umd')));
 
+// Set views directory
+app.set('views', './src/views');
+
+// Set Pug templating engine
+app.set('view engine', 'pug');
+
 // Index route
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'views/index.html'));
+  res.render('index');
 });
 
 app.listen(port, (req, res) => {
