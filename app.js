@@ -37,7 +37,8 @@ app.set('view engine', 'ejs');
 // Index route
 app.get('/', (req, res) => {
   res.render('index', {
-    list: ['a', 'b'],
+    nav: [{ link: '/books', title: 'books' },
+          { link: '/authors', title: 'authors' }],
     title: 'Node Library App'
   });
 });
