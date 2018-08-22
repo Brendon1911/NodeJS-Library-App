@@ -10,8 +10,12 @@ const port = process.env.PORT || 3000;
 // Declare app
 const app = express();
 
+// Navigation
+const nav = [{ link: '/books', title: 'books' },
+             { link: '/authors', title: 'authors' }];
+
 // Routing
-const bookRouter = require("./src/routes/bookRoutes");
+const bookRouter = require("./src/routes/bookRoutes")(nav);
 
 // Use Morgan
 app.use(morgan('tiny'));
