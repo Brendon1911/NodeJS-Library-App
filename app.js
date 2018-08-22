@@ -11,7 +11,7 @@ const port = process.env.PORT || 3000;
 const app = express();
 
 // Routing
-const bookRouter = express.Router();
+const bookRouter = require("./src/routes/bookRoutes");
 
 // Use Morgan
 app.use(morgan('tiny'));
@@ -36,54 +36,6 @@ app.set('views', './src/views');
 
 // Set Pug templating engine
 app.set('view engine', 'ejs');
-
-const books = [
-  {
-    title: 'The Subway Girls',
-    genre: 'Historical Fiction',
-    author: ' Susie Orman Schnall',
-    read: false
-  },
-  {
-    title: 'War',
-    genre: 'Fantasy',
-    author: 'Jennifer Anne Davis',
-    read: false
-  },
-  {
-    title: 'Sanctuary',
-    genre: 'Science Fiction',
-    author: 'Caryn Lix',
-    read: false
-  },
-  {
-    title: '1984',
-    genre: 'Science Fiction',
-    author: 'George Orwell',
-    read: false
-  },
-  {
-    title: 'Of Mice and Men',
-    genre: 'Historical Fiction',
-    author: 'John Steinbeck',
-    read: false
-  }
-];
-
-bookRouter.route('/')
-  .get((req, res) => {
-    res.render('books', {
-      nav: [{ link: '/books', title: 'books' },
-            { link: '/authors', title: 'authors' }],
-      title: 'Node Library App',
-      books
-    });
-  });
-  
-bookRouter.route('/single')
-  .get((req, res) => {
-    res.send('Hello books');
-  });
 
 app.use('/books', bookRouter);
 
