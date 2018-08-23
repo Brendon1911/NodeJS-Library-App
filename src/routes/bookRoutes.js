@@ -1,87 +1,83 @@
-// Requirements
 const express = require('express');
 
 const bookRouter = express.Router();
 
-const sql =require("mssql");
-
-const debug = require('debug')('app:bookRoutes')
-
-// Router function
-function router (nav) {
+function router(nav) {
   const books = [
     {
-      title: 'The Subway Girls',
+      title: 'War and Peace',
       genre: 'Historical Fiction',
-      author: ' Susie Orman Schnall',
+      author: 'Lev Nikolayevich Tolstoy',
       read: false
     },
     {
-      title: 'War',
+      title: 'Les Misérables',
+      genre: 'Historical Fiction',
+      author: 'Victor Hugo',
+      read: false
+    },
+    {
+      title: 'The Time Machine',
+      genre: 'Science Fiction',
+      author: 'H. G. Wells',
+      read: false
+    },
+    {
+      title: 'A Journey into the Center of the Earth',
+      genre: 'Science Fiction',
+      author: 'Jules Verne',
+      read: false
+    },
+    {
+      title: 'The Dark World',
       genre: 'Fantasy',
-      author: 'Jennifer Anne Davis',
+      author: 'Henry Kuttner',
       read: false
     },
     {
-      title: 'Sanctuary',
-      genre: 'Science Fiction',
-      author: 'Caryn Lix',
+      title: 'The Wind in the Willows',
+      genre: 'Fantasy',
+      author: 'Kenneth Grahame',
       read: false
     },
     {
-      title: '1984',
-      genre: 'Science Fiction',
-      author: 'George Orwell',
+      title: 'Life On The Mississippi',
+      genre: 'History',
+      author: 'Mark Twain',
       read: false
     },
     {
-      title: 'Of Mice and Men',
-      genre: 'Historical Fiction',
-      author: 'John Steinbeck',
+      title: 'Childhood',
+      genre: 'Biography',
+      author: 'Lev Nikolayevich Tolstoy',
       read: false
-    }
-  ];
-  
-  // All books route
+    }];
   bookRouter.route('/')
     .get((req, res) => {
-      (async function query(){
-        const request = new sql.Request();
-      
-      const { recordset } = await request.query('select * from books')
-        .then((result) => {
-          res.render('bookListView', 
-          {
-            nav,
-            title: 'Node Library App',
-            books: recordset
-          });
-        });
-      }());
-    });
-  
-  // Single book route
-  bookRouter.route('/:id')
-    .all((req, res, next) => {
-      (async function query (){
-        const { id } = req.params;
-        const request = new sql.Request();
-        const { recordset } = 
-          await request.input('id', sql.Int, id)
-            .query('select * from books where id = @id');
-        [req.book] = recordset;
-        next();
-      }());
-    })
-    .get((req, res) => {
-      res.render('bookView', 
+      res.render(
+        'bookListView',
         {
           nav,
-          title: 'Node Library App',
-          book: req.book
-        });
+          title: 'Library',
+          books
+        }
+      );
+    });
+
+  bookRouter.route('/:id')
+    .get((req, res) => {
+      const { id } = req.params;
+      res.render(
+        'bookView',
+        {
+          nav,
+          title: 'Library',
+          book: books[id]
+        }
+      );
     });
   return bookRouter;
 }
-  
+
+
 module.exports = router;

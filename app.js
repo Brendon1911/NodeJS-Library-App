@@ -1,9 +1,14 @@
 // Require statements
 const express = require('express');
+
 const chalk = require('chalk');
+
 const debug = require('debug')('app');
+
 const morgan = require('morgan');
+
 const path = require('path');
+
 const sql = require('mssql');
 
 // Set port
@@ -16,8 +21,11 @@ const app = express();
 const nav = [{ link: '/books', title: 'books' },
              { link: '/authors', title: 'authors' }];
 
-// Require routes
+// Require book routes
 const bookRouter = require('./src/routes/bookRoutes')(nav);
+
+// Require admin routes
+const adminRouter = require('./src/routes/adminRoutes')(nav);
 
 // Configure Azure database
 const config = {
@@ -63,6 +71,8 @@ app.set('views', './src/views');
 app.set('view engine', 'ejs');
 
 app.use('/books', bookRouter);
+
+app.use('/admin', adminRouter);
 
 // Index route
 app.get('/', (req, res) => {
