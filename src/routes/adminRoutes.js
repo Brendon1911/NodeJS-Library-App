@@ -1,7 +1,7 @@
 // Requirements
 const express = require('express');
 
-const { mongoClient } = require('mongodb');
+const { MongoClient } = require('mongodb');
 
 const debug = require('debug')('app:adminRoutes');
 
@@ -60,7 +60,7 @@ const books = [
 function router (nav) {
   adminRouter.route('/')
     .get((req, res) => {
-      const url = 'mongodb://localhost:27017';
+      const url = 'mongodb://brendon1911-node-library-app-6333739:27017';
       const dbName = 'nodeLibraryApp';
       
       (async function mongo () {
