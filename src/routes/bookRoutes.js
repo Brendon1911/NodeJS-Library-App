@@ -1,5 +1,9 @@
 const express = require('express');
 
+const { MongoClient } = require('mongodb');
+
+const debug = require('debug')('app:bookRoutes');
+
 const bookRouter = express.Router();
 
 function router(nav) {
@@ -54,6 +58,20 @@ function router(nav) {
     }];
   bookRouter.route('/')
     .get((req, res) => {
+      const url = 'mongodb://brendon1911-node-library-app-6333739:27017';
+      const dbName = 'nodeLibraryApp';
+      
+      (async function mongo () {
+        let client;
+        try {
+          client = await MongoClient.connect(url);
+          debug('Connected correctly to server');
+          
+          const db = client.db(dbName);
+          
+          const col = await db.collection('books');
+          
+          const books = await col.find().toArray();
       res.render(
         'bookListView',
         {
@@ -62,6 +80,11 @@ function router(nav) {
           books
         }
       );
+        } catch (err) {
+          debug(err.stack);
+        }
+      client.close();
+      }());
     });
 
   bookRouter.route('/:id')
