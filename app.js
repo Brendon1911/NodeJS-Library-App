@@ -9,6 +9,8 @@ const morgan = require('morgan');
 
 const path = require('path');
 
+const bodyParser = require('body-parser');
+
 const sql = require('mssql');
 
 // Set port
@@ -27,6 +29,9 @@ const bookRouter = require('./src/routes/bookRoutes')(nav);
 // Require admin routes
 const adminRouter = require('./src/routes/adminRoutes')(nav);
 
+// Require auth routes
+const authRouter = require('./src/routes/authRoutes')(nav);
+
 // Configure Azure database
 const config = {
     user: 'library',
@@ -44,10 +49,8 @@ sql.connect(config).catch(err => debug(err));
 // Use Morgan
 app.use(morgan('tiny'));
 
-app.use((req, res, next) => {
-  debug('My middleware');
-  next();
-});
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
 
 // Use public files
 app.use(express.static(path.join(__dirname, '/public')));
@@ -73,6 +76,8 @@ app.set('view engine', 'ejs');
 app.use('/books', bookRouter);
 
 app.use('/admin', adminRouter);
+
+app.use('/auth', authRouter);
 
 // Index route
 app.get('/', (req, res) => {

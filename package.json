@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/Brendon1911/NodeJS-Library-App#readme",
   "dependencies": {
+    "body-parser": "^1.18.3",
     "bootstrap": "3.3.7",
     "chalk": "2.4.1",
     "debug": "3.1.0",
