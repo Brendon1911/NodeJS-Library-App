@@ -9,12 +9,33 @@ const authRouter = express.Router();
 function router () {
   authRouter.route('/signUp')
     .post((req, res) => {
+      const { username, password } = req.body;
+      const url = 'mongodb://brendon1911-node-library-app-6333739:27017';
+      const dbName = 'nodeLibraryApp';
+      
+      (async function addUser (){
+        let client;
+        try {
+          client = await MongoClient.connect(url);
+          debug('Connected correctly to server');
+          
+          const db = client.db(dbName);
+          
+          const col = db.collection('users');
+          const user = { username, password };
+          const results = await col.insertOne(user);
+          debug(results);
+          req.login(results.ops[0], () => {
+            res.redirect('/auth/profile');
+          });
+        } catch (err) {
+          debug(err);
+        }
+      }());
       debug(req.body);
-      // Create user
       req.login(req.body, () => {
         res.redirect('/auth/profile');
       });
-      res.json(req.body);
     });
   authRouter.route('/profile')
     .get((req, res) => {
